@@ -2,7 +2,7 @@
 
 | File | What it is | SHA-256 |
 |---|---|---|
-| [custom-minigames-0.3.2-livewire-0.4.1-powergrid-0.1.2-spotlight-0.1.1.zip](custom-minigames-0.3.2-livewire-0.4.1-powergrid-0.1.2-spotlight-0.1.1.zip) | Test release: framework 0.3.2, Live Wire 0.4.1, Power Grid 0.1.2, Spotlight 0.1.1, installer | `2ec35cfc04189a92cebbb8af8210f569d4b056b847bdf1ec7cabc9c56eeeae7e` |
+| [custom-minigames-0.3.2-livewire-0.4.1-powergrid-0.1.2-spotlight-0.1.1.zip](custom-minigames-0.3.2-livewire-0.4.1-powergrid-0.1.2-spotlight-0.1.1.zip) | Test release: framework 0.3.2, Live Wire 0.4.1, Power Grid 0.1.2, Spotlight 0.1.1, installer | `87e9c4fef84c45bfc37cce011c774455c07c3344906e5250f9d121e4a615f2aa` |
 
 Open the zip file above, then click the download button (top right of the file view). Unzip it, close
 the game and double-click **Install.bat**. You need the

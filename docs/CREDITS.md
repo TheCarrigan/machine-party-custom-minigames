@@ -1,5 +1,6 @@
 # Credits
 
+- **Built by TheCarrigan with the help of Claude**, an AI assistant made by Anthropic, which wrote most of the code. Designed, directed and play-tested by TheCarrigan.
 - **Machine Party** by Mike Klubnika and GDeavid, published by Oro Interactive. The game, its
   characters, animations, sounds and other content are theirs. This mod uses them only from the
   player's own installed copy and does not include any of them.
