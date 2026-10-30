@@ -13,7 +13,7 @@ Teaser video: [media/machine-party-custom-minigames-teaser.mp4](media/machine-pa
 1. You need **Machine Party** on Steam (PC) and the
    [Machine Party Mod Loader](https://github.com/Krunk-theduck/MachinePartyModLoader) by Krunk-theduck.
    Install the loader first (see its page).
-2. Download the latest zip from this repo's **Releases** page (not the source code).
+2. Download the latest zip from the [`downloads`](downloads/) folder (or the **Releases** page, if there is one). Not the "Code > Download ZIP" button: that's the source.
 3. Close the game, unzip the download and double-click **Install.bat**. It finds the game through
    Steam, checks the mod loader is installed and copies the mods in.
 4. Start the game through Steam. Everyone in a lobby needs the same version.
