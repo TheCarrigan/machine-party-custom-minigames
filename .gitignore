@@ -1,0 +1,7 @@
+release/
+mods/*/*.zip
+__pycache__/
+*.pyc
+.godot/
+*.uid
+*.import

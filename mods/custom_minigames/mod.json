@@ -1,0 +1,8 @@
+{
+  "id": "custom_minigames",
+  "name": "Custom Minigames framework",
+  "version": "0.3.2",
+  "entry": "main.gd",
+  "priority": 5,
+  "requires": []
+}

@@ -1,0 +1,45 @@
+Custom Minigames for Machine Party - install guide
+===================================================
+
+Unofficial fan mod. You need your own copy of Machine Party (Steam, PC).
+
+BEFORE YOU START - back up your settings
+  Copy this folder somewhere safe:  %APPDATA%\Godot\app_userdata\Machine Party
+  (Press Win+R, paste the path, press Enter.)
+
+1. Find the game folder
+   Steam > right-click Machine Party > Manage > Browse local files > open "Machine Party_Windows".
+   You should see "Machine Party.exe" and "Machine Party.pck".
+
+2. Install the mod loader (needed by all Machine Party mods that add code)
+   Get "Machine Party Mod Loader" by Krunk-theduck from its GitHub page:
+     https://github.com/Krunk-theduck/MachinePartyModLoader
+   Put MachinePartyModLoader.exe next to "Machine Party.exe" and run it. It patches the game
+   and creates a "mods" folder there. (Run it again after every game update.)
+
+3. Install this mod
+   EASY WAY: close the game, then double-click Install.bat in this download. It finds the game
+   through Steam (or asks you for the folder), checks the mod loader is installed, and copies the
+   mod folders in. Updating later? Run the new version's Install.bat: your settings.cfg
+   choices are kept. It's a short script you can read first: installer\installer.ps1.
+   (Windows may ask whether to run it: choose "More info" > "Run anyway" only if you got this
+   download from a source you trust.)
+
+   BY HAND: copy all the folders from this download's "mods" folder - custom_minigames, live_wire,
+   power_grid and spotlight - into the game's "mods" folder.
+
+   Optional: to practise alone, open mods\live_wire\settings.cfg (or power_grid's or spotlight's)
+   in Notepad and set bots=3. Live Wire's settings.cfg also lets you pick an arena.
+
+4. Play
+   Start Steam, then the game. Live Wire, Power Grid and Spotlight are in the standard playlist and in the lobby's
+   custom playlist editor. Everyone in your lobby needs the same mod version.
+
+UNINSTALL
+  Double-click Uninstall.bat, or delete the custom_minigames, live_wire, power_grid and spotlight folders from "mods". To remove the mod loader as well,
+  run its uninstaller, or in Steam use Properties > Installed Files > Verify integrity of game files.
+  If you used a copy of the game folder, just delete the copy.
+
+IF THE MOD SAYS IT IS SWITCHED OFF
+  A game update changed something it relies on. Your game is unaffected; check for a mod update.
+  Details are in %APPDATA%\Godot\app_userdata\Machine Party\modloader.log

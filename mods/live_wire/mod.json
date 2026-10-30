@@ -1,0 +1,10 @@
+{
+  "id": "live_wire",
+  "name": "Live Wire (custom minigame)",
+  "version": "0.4.1",
+  "entry": "main.gd",
+  "priority": 20,
+  "requires": [
+    "custom_minigames"
+  ]
+}

@@ -1,0 +1,10 @@
+{
+  "id": "spotlight",
+  "name": "Spotlight (custom minigame)",
+  "version": "0.1.1",
+  "entry": "main.gd",
+  "priority": 22,
+  "requires": [
+    "custom_minigames"
+  ]
+}

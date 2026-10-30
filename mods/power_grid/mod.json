@@ -1,0 +1,10 @@
+{
+  "id": "power_grid",
+  "name": "Power Grid (custom minigame)",
+  "version": "0.1.2",
+  "entry": "main.gd",
+  "priority": 21,
+  "requires": [
+    "custom_minigames"
+  ]
+}

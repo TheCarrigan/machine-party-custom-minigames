@@ -1,0 +1,161 @@
+[gd_scene format=3]
+
+[ext_resource type="Script" path="res://custom_minigames_content/power_grid/power_grid.gd" id="1_root"]
+[ext_resource type="Script" path="res://custom_minigames_content/power_grid/power_grid_floor.gd" id="2_grid"]
+[ext_resource type="Script" path="res://modules/state_machine/StateMachine.gd" id="3_sm"]
+[ext_resource type="Script" path="res://minigames/shared/states/empty_state.gd" id="4_empty"]
+[ext_resource type="Script" path="res://minigames/shared/states/round_state.gd" id="5_round"]
+[ext_resource type="Script" path="res://minigames/shared/states/player_marker_state.gd" id="6_marker"]
+[ext_resource type="Script" path="res://minigames/shared/states/countdown_state.gd" id="7_countdown"]
+[ext_resource type="Script" path="res://custom_minigames_content/power_grid/states/play_state.gd" id="8_play"]
+[ext_resource type="Script" path="res://custom_minigames_content/power_grid/states/finish_state.gd" id="9_finish"]
+[ext_resource type="PackedScene" path="res://modules/minigame/components/overlay/minigame_overlay.tscn" id="10_overlay"]
+[ext_resource type="AudioStream" path="res://audio/unique/kato/kato_light hum loop.ogg" id="11_hum"]
+
+[sub_resource type="Environment" id="Env"]
+background_mode = 1
+background_color = Color(0.025, 0.03, 0.035, 1)
+ambient_light_source = 2
+ambient_light_color = Color(0.25, 0.28, 0.35, 1)
+ambient_light_energy = 0.6
+adjustment_enabled = true
+adjustment_brightness = 1.1
+adjustment_contrast = 1.1
+adjustment_saturation = 0.7
+
+[sub_resource type="StandardMaterial3D" id="BaseMat"]
+albedo_color = Color(0.06, 0.065, 0.07, 1)
+metallic = 0.3
+roughness = 0.8
+
+[sub_resource type="BoxMesh" id="BaseMesh"]
+material = SubResource("BaseMat")
+size = Vector3(18, 1, 12)
+
+[sub_resource type="BoxShape3D" id="BaseShape"]
+size = Vector3(18, 1, 12)
+
+[sub_resource type="StandardMaterial3D" id="EdgeMat"]
+albedo_color = Color(0.85, 0.65, 0.05, 1)
+emission_enabled = true
+emission = Color(0.85, 0.6, 0.05, 1)
+emission_energy_multiplier = 0.4
+
+[sub_resource type="BoxMesh" id="EdgeMesh"]
+material = SubResource("EdgeMat")
+size = Vector3(18.3, 0.15, 12.3)
+
+[sub_resource type="WorldBoundaryShape3D" id="FallShape"]
+
+[node name="PowerGrid" type="Node" node_paths=PackedStringArray("countdown", "worker_parent", "spawn_points", "grid", "surge_sound", "minigame_overlay")]
+script = ExtResource("1_root")
+countdown = NodePath("StateMachine/Countdown")
+worker_parent = NodePath("Networked/Players")
+spawn_points = NodePath("Networked/PlayerSpawnPositions")
+grid = NodePath("Arena/Grid")
+surge_sound = NodePath("Surge")
+minigame_overlay = NodePath("MinigameOverlay")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Env")
+
+[node name="Lights" type="Node3D" parent="."]
+
+[node name="KeyLight" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 9, 0)
+light_color = Color(0.56, 0.55, 0.5, 1)
+light_energy = 26.0
+shadow_enabled = true
+shadow_blur = 4.0
+omni_range = 30.0
+
+[node name="FillLight" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4, 9)
+light_color = Color(0.4, 0.45, 0.6, 1)
+light_energy = 4.0
+omni_range = 16.0
+
+[node name="Arena" type="Node3D" parent="."]
+
+[node name="Floor" type="StaticBody3D" parent="Arena"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+
+[node name="Mesh" type="MeshInstance3D" parent="Arena/Floor"]
+mesh = SubResource("BaseMesh")
+
+[node name="Shape" type="CollisionShape3D" parent="Arena/Floor"]
+shape = SubResource("BaseShape")
+
+[node name="HazardEdge" type="MeshInstance3D" parent="Arena"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.95, 0)
+mesh = SubResource("EdgeMesh")
+
+[node name="Grid" type="Node3D" parent="Arena"]
+script = ExtResource("2_grid")
+
+[node name="FallArea" type="Area3D" parent="Arena"]
+collision_layer = 16
+collision_mask = 16
+
+[node name="Shape" type="CollisionShape3D" parent="Arena/FallArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -5, 0)
+shape = SubResource("FallShape")
+
+[node name="Surge" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("11_hum")
+volume_db = -4.0
+pitch_scale = 1.6
+bus = &"SFX"
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("3_sm")
+initial_state = NodePath("Empty")
+
+[node name="Empty" type="Node" parent="StateMachine"]
+script = ExtResource("4_empty")
+
+[node name="Round" type="Node" parent="StateMachine"]
+script = ExtResource("5_round")
+
+[node name="PlayerMarker" type="Node" parent="StateMachine" node_paths=PackedStringArray("players_node")]
+script = ExtResource("6_marker")
+players_node = NodePath("../../Networked/Players")
+
+[node name="Countdown" type="Node" parent="StateMachine"]
+script = ExtResource("7_countdown")
+
+[node name="Play" type="Node" parent="StateMachine"]
+script = ExtResource("8_play")
+
+[node name="Finish" type="Node" parent="StateMachine"]
+script = ExtResource("9_finish")
+
+[node name="Networked" type="Node3D" parent="."]
+
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="Networked"]
+_spawnable_scenes = PackedStringArray("res://minigames/disco_dodge/components/player/disco_dodge_player.tscn")
+spawn_path = NodePath("../Players")
+spawn_limit = 4
+
+[node name="Players" type="Node3D" parent="Networked"]
+
+[node name="PlayerSpawnPositions" type="Node3D" parent="Networked"]
+
+[node name="Spawn1" type="Marker3D" parent="Networked/PlayerSpawnPositions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0, -1.5)
+
+[node name="Spawn2" type="Marker3D" parent="Networked/PlayerSpawnPositions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, -1.5)
+
+[node name="Spawn3" type="Marker3D" parent="Networked/PlayerSpawnPositions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5, 0, 1.5)
+
+[node name="Spawn4" type="Marker3D" parent="Networked/PlayerSpawnPositions"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0, 1.5)
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.7755508, 0.6312849, 0, -0.6312849, 0.7755508, 0, 9.2, 11.6)
+current = true
+fov = 67.8
+
+[node name="MinigameOverlay" parent="." instance=ExtResource("10_overlay")]
