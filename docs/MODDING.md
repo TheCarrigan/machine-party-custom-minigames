@@ -233,6 +233,10 @@ its script.
 
 ## 8. Sharing it: what you may and may not include
 
+> Built on this framework, or reused one of the demo minigames? A credit and a link back to
+> https://github.com/TheCarrigan/machine-party-custom-minigames is appreciated. The MIT licence also
+> asks you to keep the copyright notice and licence text with any copied code.
+
 - **Ship only your own work:** your scripts, scenes, icon and docs. Use art and sound you made
   yourself, or CC0 assets with credit.
 - **Don't include any of the game's files**, even ones you changed, and don't include code copied

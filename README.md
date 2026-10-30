@@ -123,6 +123,8 @@ Only original work: scripts, hand-made scenes, icons, docs and the installer. **
 
 More in [`docs/CREDITS.md`](docs/CREDITS.md).
 
+> 💬 **Using this framework or the demo minigames in your own mod?** A credit and a link back to this repo is appreciated.
+
 ## Licence
 
 The mod's own code, scenes and icons are under the [MIT licence](LICENSE). Machine Party and all of its content belong to its developers and publisher and aren't covered by it.
